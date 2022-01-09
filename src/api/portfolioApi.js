@@ -1,4 +1,5 @@
 export async function getHoldings(userInput) {
+  await sleep(2000);
   return fetch("http://localhost:3005/PortfolioApis/getuserholdings", {
     method: "POST",
     headers: {
@@ -8,10 +9,13 @@ export async function getHoldings(userInput) {
     body: JSON.stringify({
       UserId: "Vijay 106",
     }),
-  });
-  /* .then((data) => {
-      console.log("RESPONSE 1 -- " + data);
-    });*/
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
