@@ -4,10 +4,10 @@ export async function getHoldings(userInput) {
     method: "POST",
     headers: {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJBcGlVc2VycyIsImF1dGhvcml6ZWQiOnRydWUsImNsaWVudCI6IlZpamF5IDEwNiIsImV4cCI6MTY0MTc4NTM5OSwiaXNzIjoiUG9ydGZvbGlvQXBpc0FwcCJ9.ou6ArZJprOOlKTdrwgkZW8vsky048zKR14gZM8JEaM4",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJBcGlVc2VycyIsImF1dGhvcml6ZWQiOnRydWUsImNsaWVudCI6IlZpamF5IDExMyIsImV4cCI6MTY0MjA0MDM1OSwiaXNzIjoiUG9ydGZvbGlvQXBpc0FwcCJ9.GZKPfscDo6TkJoIxSplNRTSekSfeEPIJ_3DOT60UaiQ",
     },
     body: JSON.stringify({
-      UserId: "Vijay 106",
+      UserId: "Vijay 113",
     }),
   })
     .then((response) => {
