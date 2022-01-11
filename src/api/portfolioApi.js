@@ -18,4 +18,20 @@ export async function getHoldings(userInput) {
     });
 }
 
+export async function getToken(userInput) {
+  return fetch("http://localhost:3005/PortfolioApis/login", {
+    method: "POST",
+    body: JSON.stringify({
+      UserId: userInput.UserId,
+      password: userInput.password,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

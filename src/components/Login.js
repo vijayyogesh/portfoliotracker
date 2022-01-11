@@ -1,29 +1,35 @@
 import React from "react";
 import "./Login.css";
+import LoginForm from "./LoginForm";
+import { useState } from "react";
+import { getToken } from "./../api/portfolioApi";
 
-function Login() {
+function Login(props) {
+  const [user, setUser] = useState({
+    userId: "",
+    password: "",
+  });
+
+  function handleChange(event) {
+    const updatedUser = {
+      ...user,
+      [event.target.name]: event.target.value,
+    };
+    setUser(updatedUser);
+  }
+
+  async function handleSubmit() {
+    debugger;
+    console.log("User - " + user);
+    let token = await getToken(user);
+    console.log(token);
+    //props.setToken(token);
+  }
+
   return (
     <div className="login-wrapper">
       <h2>Please Log In </h2>
-      <form>
-        <div>
-          <label>
-            <p>Username</p>
-            <input type="text"></input>
-          </label>
-        </div>
-        <div>
-          <label>
-            <p>Password</p>
-            <input type="password"></input>
-          </label>
-        </div>
-        <div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-      </form>
+      <LoginForm user={user} onChange={handleChange} onSubmit={handleSubmit} />
     </div>
   );
 }
