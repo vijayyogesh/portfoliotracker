@@ -7,15 +7,12 @@ import Login from "./Login";
 
 function App() {
   const [token, setToken] = useState();
-  if (token) {
+  if (!token) {
     return <Login setToken={setToken}></Login>;
   }
 
   return (
     <>
-      {
-        //!token ? <Header /> : <></>
-      }
       <Header />
       <Route path="/" exact component={HomePage} />
       <Route path="/homepage" component={HomePage} />

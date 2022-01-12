@@ -10,11 +10,11 @@ function LoginForm(props) {
             <p>Username</p>
             <input
               type="text"
-              id="userId"
-              name="userId"
+              id="UserId"
+              name="UserId"
               className="form-control"
               onChange={props.onChange}
-              value={props.user.userId}
+              value={props.user.UserId}
             ></input>
           </label>
         </div>
