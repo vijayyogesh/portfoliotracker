@@ -1,23 +1,40 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Holdings from "./Holdings";
 import HomePage from "./HomePage";
 import Login from "./Login";
 
 function App() {
-  const [token, setToken] = useState();
-  if (!token) {
-    return <Login setToken={setToken}></Login>;
+  const [userTokenObj, setUserTokenObj] = useState({
+    UserId: "",
+    Token: "",
+    IsAuthenticated: false,
+  });
+  if (!userTokenObj.IsAuthenticated) {
+    return <Login setUserTokenObj={setUserTokenObj}></Login>;
   }
 
   return (
     <>
       <Header />
-      <Route path="/" exact component={HomePage} />
-      <Route path="/homepage" component={HomePage} />
-      <Route path="/holdings" component={Holdings} />
-      <Route path="/login" component={Login} />
+      <Switch>
+        <Route
+          path="/"
+          exact
+          render={() => {
+            return <HomePage />;
+          }}
+        />
+        <Route path="/homepage" component={HomePage} />
+        <Route
+          path="/holdings"
+          render={() => {
+            return <Holdings userTokenObj={userTokenObj} />;
+          }}
+        />
+        <Route path="/login" component={Login} />
+      </Switch>
     </>
   );
 }

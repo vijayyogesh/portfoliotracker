@@ -2,12 +2,12 @@ import { React, useEffect, useState } from "react";
 import { getHoldings } from "./../api/portfolioApi";
 import HoldingsList from "./HoldingsList";
 
-function Holdings() {
+function Holdings(props) {
   const [holdings, setHoldings] = useState([]);
   const [isDataLoaded, setDataLoaded] = useState(false);
 
   async function fetchData() {
-    let response = await getHoldings();
+    let response = await getHoldings(props.userTokenObj);
     setHoldings(response);
     setDataLoaded(true);
   }

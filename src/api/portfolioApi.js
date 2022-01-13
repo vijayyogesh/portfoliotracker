@@ -3,11 +3,10 @@ export async function getHoldings(userInput) {
   return fetch("http://localhost:3005/PortfolioApis/getuserholdings", {
     method: "POST",
     headers: {
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJBcGlVc2VycyIsImF1dGhvcml6ZWQiOnRydWUsImNsaWVudCI6IlZpamF5IDExMyIsImV4cCI6MTY0MjA0MDM1OSwiaXNzIjoiUG9ydGZvbGlvQXBpc0FwcCJ9.GZKPfscDo6TkJoIxSplNRTSekSfeEPIJ_3DOT60UaiQ",
+      token: userInput.Token,
     },
     body: JSON.stringify({
-      UserId: "Vijay 113",
+      UserId: userInput.UserId,
     }),
   })
     .then((response) => {
