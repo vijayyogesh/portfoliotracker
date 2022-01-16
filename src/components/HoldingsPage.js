@@ -1,8 +1,9 @@
 import { React, useEffect, useState } from "react";
-import { getHoldings } from "./../api/portfolioApi";
+import { Link } from "react-router-dom";
+import { getHoldings } from "../api/portfolioApi";
 import HoldingsList from "./HoldingsList";
 
-function Holdings(props) {
+function HoldingsPage(props) {
   const [holdings, setHoldings] = useState([]);
   const [isDataLoaded, setDataLoaded] = useState(false);
 
@@ -21,7 +22,14 @@ function Holdings(props) {
       <h2>Holdings Page</h2>
 
       {isDataLoaded ? (
-        <HoldingsList holdings={holdings} />
+        <>
+          <p>
+            <Link to="/holding" className="btn btn-primary">
+              Add Holding
+            </Link>
+          </p>
+          <HoldingsList holdings={holdings} />
+        </>
       ) : (
         <p>No data available</p>
       )}
@@ -29,4 +37,4 @@ function Holdings(props) {
   );
 }
 
-export default Holdings;
+export default HoldingsPage;

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import { Route, Switch } from "react-router-dom";
-import Holdings from "./Holdings";
+import HoldingsPage from "./HoldingsPage";
 import HomePage from "./HomePage";
 import Login from "./Login";
+import ManageHoldings from "./ManageHoldings";
 
 function App() {
   const [userTokenObj, setUserTokenObj] = useState({
@@ -30,10 +31,11 @@ function App() {
         <Route
           path="/holdings"
           render={() => {
-            return <Holdings userTokenObj={userTokenObj} />;
+            return <HoldingsPage userTokenObj={userTokenObj} />;
           }}
         />
         <Route path="/login" component={Login} />
+        <Route path="/holding" component={ManageHoldings} />
       </Switch>
     </>
   );
