@@ -1,5 +1,5 @@
-export async function getHoldings(userInput) {
-  await sleep(2000);
+export function getHoldings(userInput) {
+  //await sleep(2000);
   return fetch("http://localhost:3005/PortfolioApis/getuserholdings", {
     method: "POST",
     headers: {
@@ -23,6 +23,24 @@ export async function getToken(userInput) {
     body: JSON.stringify({
       UserId: userInput.UserId,
       password: userInput.password,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export function fetchAllCompanies(userInput) {
+  return fetch("http://localhost:3005/PortfolioApis/fetchallcompanies", {
+    method: "POST",
+    headers: {
+      token: userInput.Token,
+    },
+    body: JSON.stringify({
+      UserId: userInput.UserId,
     }),
   })
     .then((response) => {

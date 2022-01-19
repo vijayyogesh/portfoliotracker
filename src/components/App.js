@@ -35,7 +35,12 @@ function App() {
           }}
         />
         <Route path="/login" component={Login} />
-        <Route path="/holding" component={ManageHoldings} />
+        <Route
+          path="/holding"
+          render={() => {
+            return <ManageHoldings userTokenObj={userTokenObj} />;
+          }}
+        />
       </Switch>
     </>
   );
