@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 import { fetchAllCompanies } from "../api/portfolioApi";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 function ManageHoldings(props) {
-  const [companyNameInput, setCompanyNameInput] = useState("");
   const [companies, setCompanies] = useState([]);
-  const [filteredCompanies, setFilteredCompanies] = useState("");
+  const [holding, setHoldings] = useState({});
 
+  /* Load unique list of companies for dropdown */
   useEffect(() => {
-    console.log(props);
     async function fetchData() {
       let response = await fetchAllCompanies(props.userTokenObj);
       let compArray = [];
@@ -20,37 +21,23 @@ function ManageHoldings(props) {
     fetchData();
   }, [props]);
 
-  function onChange(event) {
-    event.preventDefault();
-    let userInput = event.target.value.toLowerCase();
-    setCompanyNameInput(userInput);
-    console.log(userInput);
-    console.log(companies);
-    let filteredArr = companies.filter((company) =>
-      company.toLowerCase().includes(event.target.value)
-    );
-    console.log(filteredArr);
-    setFilteredCompanies(filteredArr);
-  }
-
   return (
     <>
       <h2>Manage Holdings</h2>
       <form>
         <div className="form-group">
-          <label>
-            <p>Company Name</p>
-            <input
-              type="text"
-              id="companyName"
-              name="companyName"
-              className="form-control"
-              onChange={onChange}
-              value={companyNameInput}
-            ></input>
-          </label>
+          <Autocomplete
+            onChange={(event, value) =>
+              console.log(event.target.outerText, value)
+            }
+            id="combo-box-demo"
+            options={companies}
+            sx={{ width: 300 }}
+            renderInput={(params) => (
+              <TextField {...params} label="Companies" />
+            )}
+          />
         </div>
-        <div>{filteredCompanies}</div>
       </form>
     </>
   );
