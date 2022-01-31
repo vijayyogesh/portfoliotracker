@@ -47,6 +47,11 @@ function ManageHoldings(props) {
     console.log(updatedHolding);
   }
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+    console.log("In submit");
+  }
+
   return (
     <>
       <h2>Manage Holdings</h2>
@@ -97,7 +102,11 @@ function ManageHoldings(props) {
             />
           </div>
           <div>
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="btn btn-primary"
+            >
               Submit
             </button>
           </div>
