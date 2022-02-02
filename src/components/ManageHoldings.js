@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
-import { fetchAllCompanies } from "../api/portfolioApi";
+import { fetchAllCompanies, addHoldings } from "../api/portfolioApi";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./ManageHoldings.css";
@@ -18,13 +18,7 @@ function ManageHoldings(props) {
   useEffect(() => {
     async function fetchData() {
       let response = await fetchAllCompanies(props.userTokenObj);
-      //console.log(response);
-      /*let compArray = [];
-      for (let company of response) {
-        compArray.push(company.CompanyName);
-      }*/
       setCompanies(response);
-      console.log(response);
     }
     fetchData();
   }, [props]);
@@ -49,7 +43,12 @@ function ManageHoldings(props) {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    //addHoldings();
     console.log("In submit");
+    console.log(props.userTokenObj);
+    let holdingArr = [];
+    holdingArr[0] = holding;
+    addHoldings(props.userTokenObj, holdingArr);
   }
 
   return (

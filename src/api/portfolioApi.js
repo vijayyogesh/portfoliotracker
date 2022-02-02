@@ -51,4 +51,23 @@ export function fetchAllCompanies(userInput) {
     });
 }
 
+export function addHoldings(userInput, holdings) {
+  return fetch("http://localhost:3005/PortfolioApis/adduserholdings", {
+    method: "POST",
+    headers: {
+      token: userInput.Token,
+    },
+    body: JSON.stringify({
+      userId: userInput.UserId,
+      Holdings: holdings,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
