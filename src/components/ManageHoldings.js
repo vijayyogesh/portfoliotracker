@@ -4,6 +4,7 @@ import { fetchAllCompanies, addHoldings } from "../api/portfolioApi";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./ManageHoldings.css";
+import { Redirect } from "react-router-dom";
 
 function ManageHoldings(props) {
   const [companies, setCompanies] = useState([]);
@@ -11,11 +12,13 @@ function ManageHoldings(props) {
     companyid: "",
     quantity: "",
     buyPrice: "",
-    buyDate: "",
+    buyDate: "2021-01-01",
   });
+  const [userAdded, setUserAdded] = useState(Boolean);
 
   /* Load unique list of companies for dropdown */
   useEffect(() => {
+    setUserAdded(false);
     async function fetchData() {
       let response = await fetchAllCompanies(props.userTokenObj);
       setCompanies(response);
@@ -23,32 +26,36 @@ function ManageHoldings(props) {
     fetchData();
   }, [props]);
 
+  /* Handle change for all elements except AutoComplete */
   function handleChange(event) {
     const updatedHolding = {
       ...holding,
       [event.target.name]: event.target.value,
     };
     setHolding(updatedHolding);
-    console.log(updatedHolding);
   }
 
+  /* Handle AutoComplete */
   function handleAutoCompleteChange(event, value) {
     const updatedHolding = {
       ...holding,
       companyid: value.CompanyId,
     };
     setHolding(updatedHolding);
-    console.log(updatedHolding);
   }
 
+  /* Call API on Submit */
   async function handleSubmit(event) {
     event.preventDefault();
-    //addHoldings();
-    console.log("In submit");
-    console.log(props.userTokenObj);
     let holdingArr = [];
     holdingArr[0] = holding;
     addHoldings(props.userTokenObj, holdingArr);
+    setUserAdded(true);
+  }
+
+  /* Redirect to Holdings List page when new holding is added */
+  if (userAdded) {
+    return <Redirect to="/holdings" />;
   }
 
   return (
@@ -93,8 +100,8 @@ function ManageHoldings(props) {
             <TextField
               id="buyDate"
               name="buyDate"
-              label="Buy Date"
               type="date"
+              value={holding.buyDate}
               defaultValue="2021-01-01"
               onChange={handleChange}
               required
