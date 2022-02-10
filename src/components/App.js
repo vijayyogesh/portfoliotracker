@@ -5,6 +5,7 @@ import HoldingsPage from "./HoldingsPage";
 import HomePage from "./HomePage";
 import Login from "./Login";
 import ManageHoldings from "./ManageHoldings";
+import Networth from "./Networth";
 
 function App() {
   const [userTokenObj, setUserTokenObj] = useState({
@@ -41,6 +42,7 @@ function App() {
             return <ManageHoldings userTokenObj={userTokenObj} />;
           }}
         />
+        <Route path="/networth" component={Networth} />
       </Switch>
     </>
   );
