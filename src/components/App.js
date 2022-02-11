@@ -42,7 +42,12 @@ function App() {
             return <ManageHoldings userTokenObj={userTokenObj} />;
           }}
         />
-        <Route path="/networth" component={Networth} />
+        <Route
+          path="/networth"
+          render={() => {
+            return <Networth userTokenObj={userTokenObj} />;
+          }}
+        />
       </Switch>
     </>
   );
