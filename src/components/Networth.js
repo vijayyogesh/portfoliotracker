@@ -5,35 +5,31 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 function Networth(props) {
-  const [chartCategoriesData, setChartCategoriesData] = useState([]);
   const [chartSeriesData, setChartSeriesData] = useState([]);
 
   useEffect(() => {
-    let xData = [];
-    let yData = [];
+    let arrData = [];
 
     async function fetchData() {
       let response = await getNetworth(props.userTokenObj);
+      /* Set HC data format - arr([],[]..) */
       for (const key in response) {
-        xData.push(key);
-        yData.push(response[key]);
+        arrData.push([new Date(key).getTime(), response[key]]);
       }
-      setChartCategoriesData(xData);
-      setChartSeriesData(yData);
+      setChartSeriesData(arrData);
     }
-
     fetchData();
   }, [props]);
 
+  /* Highcharts Config */
   const highChartOptions = {
     title: {
       text: "My Networth",
     },
     xAxis: {
-      type: "dateTime",
-      categories: chartCategoriesData,
+      type: "datetime",
       labels: {
-        format: "{value:%Y-%b}",
+        format: "{value:%b %Y}", // Jan 2021
       },
     },
     series: [
@@ -46,7 +42,7 @@ function Networth(props) {
   return (
     <>
       <div>Networth Page</div>
-      {chartCategoriesData ? (
+      {chartSeriesData ? (
         <HighchartsReact
           highcharts={Highcharts}
           options={highChartOptions}
