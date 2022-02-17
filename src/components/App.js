@@ -6,8 +6,37 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import ManageHoldings from "./ManageHoldings";
 import Networth from "./Networth";
+import Drawer from "@mui/material/Drawer";
+import MuiAppBar from "@mui/material/AppBar";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import { makeStyles } from "@mui/styles";
+
+const listItems = [
+  {
+    listIcon: <HomePage />,
+    listText: "Holdings",
+  },
+  {
+    listIcon: <Networth />,
+    listText: "Networth",
+  },
+];
+
+const useStyles = makeStyles((theme) => ({
+  menuSliderContainer: {
+    width: "100%",
+    background: "#511",
+    height: "100%",
+  },
+}));
 
 function App() {
+  const classes = useStyles();
+
   const [userTokenObj, setUserTokenObj] = useState({
     UserId: "",
     Token: "",
@@ -19,6 +48,15 @@ function App() {
 
   return (
     <>
+      <Box component="div" className={classes.menuSliderContainer}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton></IconButton>
+            <Typography>Portfolio Tracker</Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
+
       <Header />
       <Switch>
         <Route
