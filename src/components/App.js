@@ -57,7 +57,7 @@ function App() {
     IsAuthenticated: false,
   });
 
-  /*const AppBar = styled(MuiAppBar, {
+  const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
   })(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
@@ -75,7 +75,7 @@ function App() {
     }),
   }));
 
-  /*const Drawer = styled(MuiDrawer, {
+  const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
   })(({ theme, open }) => ({
     "& .MuiDrawer-paper": {
@@ -93,13 +93,13 @@ function App() {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        width: theme.spacing(7),
+        width: theme.spacing(0),
         [theme.breakpoints.up("sm")]: {
-          width: theme.spacing(9),
+          width: theme.spacing(0),
         },
       }),
     },
-  }));*/
+  }));
 
   if (!userTokenObj.IsAuthenticated) {
     return <Login setUserTokenObj={setUserTokenObj}></Login>;
@@ -107,7 +107,7 @@ function App() {
 
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box sx={{ display: "flex" }}>
         <AppBar open={open} position="absolute">
           <Toolbar>
             <IconButton
@@ -126,8 +126,15 @@ function App() {
           </Toolbar>
         </AppBar>
 
-        <Drawer open={open}>
-          <Toolbar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              px: [1],
+            }}
+          >
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
@@ -135,7 +142,11 @@ function App() {
           <Divider />
           <List>
             <ListItem>
-              <ListItemText>Hello</ListItemText>
+              <ListItemText>Holdings</ListItemText>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText>Networth</ListItemText>
             </ListItem>
           </List>
         </Drawer>
@@ -146,6 +157,9 @@ function App() {
               theme.palette.mode === "light"
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
           }}
         >
           <Switch>
@@ -182,7 +196,7 @@ function App() {
                   <>
                     <Toolbar />
                     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                      <Grid item xs={12} md={8} lg={9}>
+                      <Grid item xs={12}>
                         <Paper
                           sx={{
                             p: 2,
