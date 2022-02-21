@@ -102,7 +102,6 @@ function ManageHoldings(props) {
               name="buyDate"
               type="date"
               value={holding.buyDate}
-              defaultValue="2021-01-01"
               onChange={handleChange}
               required
             />
