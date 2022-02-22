@@ -102,6 +102,17 @@ function App() {
     },
   }));
 
+  const onItemSelect = (item) => {
+    console.log(item);
+  };
+
+  const listItems = [
+    {
+      listIcon: <Networth />,
+      listText: "Home",
+    },
+  ];
+
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -139,24 +150,30 @@ function App() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List>
-            <ListItem component={Link} to="/networth">
+          <List sx={{ padding: "0" }}>
+            <ListItem
+              sx={{ padding: "0" }}
+              component={Link}
+              to="/networth"
+              selected={true}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   <ShowChartIcon />
                 </ListItemIcon>
-                <ListItemText primary="Networth" />
+                <ListItemText primary="Networth" sx={{ color: "#000000" }} />
               </ListItemButton>
             </ListItem>
             <Divider />
-            <ListItem component={Link} to="/holdings">
+            <ListItem sx={{ padding: "0" }} component={Link} to="/holdings">
               <ListItemButton>
                 <ListItemIcon>
                   <WorkIcon />
                 </ListItemIcon>
-                <ListItemText primary="Holdings" />
+                <ListItemText primary="Holdings" sx={{ color: "#000000" }} />
               </ListItemButton>
             </ListItem>
+            <Divider />
           </List>
         </Drawer>
 
