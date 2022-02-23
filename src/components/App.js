@@ -202,7 +202,25 @@ function App() {
             <Route
               path="/holdings"
               render={() => {
-                return <HoldingsPage userTokenObj={userTokenObj} />;
+                return (
+                  <>
+                    <Toolbar />
+                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                      <Grid item xs={12}>
+                        <Paper
+                          sx={{
+                            p: 2,
+                            display: "flex",
+                            flexDirection: "column",
+                            height: 600,
+                          }}
+                        >
+                          <HoldingsPage userTokenObj={userTokenObj} />
+                        </Paper>
+                      </Grid>
+                    </Container>
+                  </>
+                );
               }}
             />
             <Route path="/login" component={Login} />
@@ -211,7 +229,6 @@ function App() {
               render={() => {
                 return (
                   <>
-                    <Toolbar />
                     <ManageHoldings userTokenObj={userTokenObj} />
                   </>
                 );

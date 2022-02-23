@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getHoldings } from "../api/portfolioApi";
 import HoldingsList from "./HoldingsList";
+import Button from "@mui/material/Button";
 
 function HoldingsPage(props) {
   const [holdings, setHoldings] = useState([]);
@@ -19,16 +20,14 @@ function HoldingsPage(props) {
 
   return (
     <>
-      <h2>Holdings Page</h2>
-
       {isDataLoaded ? (
         <>
+          <HoldingsList holdings={holdings} />
           <p>
-            <Link to="/holding" className="btn btn-primary">
-              Add Holding
+            <Link to="/holding">
+              <Button variant="contained">Add Holding</Button>
             </Link>
           </p>
-          <HoldingsList holdings={holdings} />
         </>
       ) : (
         <p>No data available</p>
