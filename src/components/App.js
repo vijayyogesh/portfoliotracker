@@ -43,6 +43,12 @@ function App() {
     setOpen(!open);
   };
 
+  /* State to Highlight selected ListItem */
+  const [selectedItem, setSelectedItem] = useState(1);
+  const handleClickForListItem = (event, index) => {
+    setSelectedItem(index);
+  };
+
   /* State to validate authentication for each route */
   const [userTokenObj, setUserTokenObj] = useState({
     UserId: "",
@@ -102,10 +108,6 @@ function App() {
     },
   }));
 
-  const onItemSelect = (item) => {
-    console.log(item);
-  };
-
   const listItems = [
     {
       listIcon: <Networth />,
@@ -155,7 +157,8 @@ function App() {
               sx={{ padding: "0" }}
               component={Link}
               to="/networth"
-              selected={true}
+              selected={selectedItem === 1}
+              onClick={(event) => handleClickForListItem(event, 1)}
             >
               <ListItemButton>
                 <ListItemIcon>
@@ -164,8 +167,16 @@ function App() {
                 <ListItemText primary="Networth" sx={{ color: "#000000" }} />
               </ListItemButton>
             </ListItem>
+
             <Divider />
-            <ListItem sx={{ padding: "0" }} component={Link} to="/holdings">
+
+            <ListItem
+              sx={{ padding: "0" }}
+              component={Link}
+              to="/holdings"
+              selected={selectedItem === 2}
+              onClick={(event) => handleClickForListItem(event, 2)}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   <WorkIcon />
