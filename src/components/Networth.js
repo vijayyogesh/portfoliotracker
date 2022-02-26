@@ -23,6 +23,9 @@ function Networth(props) {
 
   /* Highcharts Config */
   const highChartOptions = {
+    chart: {
+      zoomType: "x",
+    },
     title: {
       text: "My Networth",
     },
