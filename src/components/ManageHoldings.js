@@ -5,6 +5,12 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./ManageHoldings.css";
 import { Redirect } from "react-router-dom";
+import Box from "@mui/material/Box";
+import { Paper } from "@mui/material";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
 
 function ManageHoldings(props) {
   const [companies, setCompanies] = useState([]);
@@ -60,63 +66,95 @@ function ManageHoldings(props) {
 
   return (
     <>
-      <h2>Manage Holdings</h2>
-      <div className="holdingsform-wrapper">
-        <form>
-          <div className="form-group">
-            <Autocomplete
-              id="companies-autocomplete"
-              onChange={handleAutoCompleteChange}
-              options={companies}
-              getOptionLabel={(option) => option.CompanyName}
-              isOptionEqualToValue={(option, value) =>
-                option.CompanyName === value.CompanyName
-              }
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Enter Company" required />
-              )}
-            />
-          </div>
-          <div className="form-group">
-            <TextField
-              label="Quantity"
-              type="number"
-              name="quantity"
-              onChange={handleChange}
-              required
-            ></TextField>
-          </div>
-          <div className="form-group">
-            <TextField
-              label="Buy Price"
-              name="buyPrice"
-              type="number"
-              onChange={handleChange}
-              required
-            ></TextField>
-          </div>
-          <div className="form-group">
-            <TextField
-              id="buyDate"
-              name="buyDate"
-              type="date"
-              value={holding.buyDate}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="btn btn-primary"
+      <Box
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light"
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
+          flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+        }}
+      >
+        <Toolbar />
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Grid item xs={12}>
+            <Paper
+              sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+                height: 600,
+              }}
             >
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+              <h2>Manage Holdings</h2>
+              <div className="holdingsform-wrapper">
+                <form>
+                  <div className="form-group">
+                    <Autocomplete
+                      id="companies-autocomplete"
+                      onChange={handleAutoCompleteChange}
+                      options={companies}
+                      getOptionLabel={(option) => option.CompanyName}
+                      isOptionEqualToValue={(option, value) =>
+                        option.CompanyName === value.CompanyName
+                      }
+                      sx={{ width: 300 }}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Enter Company" required />
+                      )}
+                    />
+                  </div>
+                  <br />
+                  <div className="form-group">
+                    <TextField
+                      label="Quantity"
+                      type="number"
+                      name="quantity"
+                      onChange={handleChange}
+                      required
+                    ></TextField>
+                  </div>
+                  <br />
+                  <div className="form-group">
+                    <TextField
+                      label="Buy Price"
+                      name="buyPrice"
+                      type="number"
+                      onChange={handleChange}
+                      required
+                    ></TextField>
+                  </div>
+                  <br />
+                  <div className="form-group">
+                    <TextField
+                      id="buyDate"
+                      name="buyDate"
+                      type="date"
+                      value={holding.buyDate}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <br />
+                  <div>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      onClick={handleSubmit}
+                      className="btn btn-primary"
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                  <br />
+                </form>
+              </div>
+            </Paper>
+          </Grid>
+        </Container>
+      </Box>
     </>
   );
 }
