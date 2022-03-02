@@ -6,7 +6,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import "./ManageHoldings.css";
 import { Redirect } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Toolbar from "@mui/material/Toolbar";
@@ -85,14 +85,17 @@ function ManageHoldings(props) {
                 p: 2,
                 display: "flex",
                 flexDirection: "column",
-                height: 600,
+                height: 450,
               }}
             >
-              <h2>Manage Holdings</h2>
+              <h2>
+                <Typography>Add New Holding</Typography>
+              </h2>
               <div className="holdingsform-wrapper">
                 <form>
                   <div className="form-group">
                     <Autocomplete
+                      size="small"
                       id="companies-autocomplete"
                       onChange={handleAutoCompleteChange}
                       options={companies}
@@ -109,6 +112,7 @@ function ManageHoldings(props) {
                   <br />
                   <div className="form-group">
                     <TextField
+                      size="small"
                       label="Quantity"
                       type="number"
                       name="quantity"
@@ -119,6 +123,7 @@ function ManageHoldings(props) {
                   <br />
                   <div className="form-group">
                     <TextField
+                      size="small"
                       label="Buy Price"
                       name="buyPrice"
                       type="number"
@@ -129,6 +134,7 @@ function ManageHoldings(props) {
                   <br />
                   <div className="form-group">
                     <TextField
+                      size="small"
                       id="buyDate"
                       name="buyDate"
                       type="date"

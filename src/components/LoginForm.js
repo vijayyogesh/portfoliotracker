@@ -1,5 +1,7 @@
 import React from "react";
 import "./Login.css";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 function LoginForm(props) {
   return (
@@ -7,39 +9,45 @@ function LoginForm(props) {
       <form>
         <div className="form-group">
           <label>
-            <p>Username</p>
-            <input
+            <TextField
+              size="small"
               type="text"
               id="UserId"
               name="UserId"
               className="form-control"
               onChange={props.onChange}
               value={props.user.UserId}
-            ></input>
+              placeholder="Username"
+            ></TextField>
           </label>
         </div>
+        <br />
         <div>
           <label>
-            <p>Password</p>
-            <input
+            <TextField
+              size="small"
               type="password"
               id="password"
               name="password"
               className="form-control"
               onChange={props.onChange}
               value={props.user.password}
-            ></input>
+              placeholder="Password"
+            ></TextField>
           </label>
         </div>
+        <br />
         <div>
-          <button
+          <Button
+            variant="contained"
             type="submit"
             className="btn btn-primary"
             onClick={props.onSubmit}
           >
             Log In
-          </button>
+          </Button>
         </div>
+        <br />
       </form>
     </>
   );

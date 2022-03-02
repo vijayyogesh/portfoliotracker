@@ -3,6 +3,12 @@ import "./Login.css";
 import LoginForm from "./LoginForm";
 import { useState } from "react";
 import { getToken } from "./../api/portfolioApi";
+import Box from "@mui/material/Box";
+import { Paper } from "@mui/material";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
 function Login(props) {
   const [user, setUser] = useState({
@@ -27,10 +33,45 @@ function Login(props) {
   }
 
   return (
-    <div className="login-wrapper">
-      <h2>Please Log In </h2>
-      <LoginForm user={user} onChange={handleChange} onSubmit={handleSubmit} />
-    </div>
+    <Box
+      sx={{
+        backgroundColor: (theme) =>
+          theme.palette.mode === "light"
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900],
+        flexGrow: 1,
+        height: "100vh",
+        overflow: "auto",
+      }}
+    >
+      <Toolbar />
+      <Container maxWidth="lg" sx={{}}>
+        <Grid item xs={12}>
+          <Paper
+            sx={{
+              p: 2,
+              ml: "auto",
+              mr: "auto",
+              display: "flex",
+              flexDirection: "column",
+              height: 250,
+              width: 300,
+            }}
+          >
+            <div className="login-wrapper">
+              <h2>
+                <Typography>Sign In </Typography>
+              </h2>
+              <LoginForm
+                user={user}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+              />
+            </div>
+          </Paper>
+        </Grid>
+      </Container>
+    </Box>
   );
 }
 

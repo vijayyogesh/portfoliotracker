@@ -44,7 +44,6 @@ function Networth(props) {
 
   return (
     <>
-      <div>Networth Page</div>
       {chartSeriesData ? (
         <HighchartsReact
           highcharts={Highcharts}
