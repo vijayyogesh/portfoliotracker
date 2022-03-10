@@ -5,18 +5,45 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 function Networth(props) {
-  const [chartSeriesData, setChartSeriesData] = useState([]);
+  const [networthSeriesData, setNetworthSeriesData] = useState([]);
+  const [equitySeriesData, setEquitySeriesData] = useState([]);
+  const [debtSeriesData, setDebtSeriesData] = useState([]);
 
   useEffect(() => {
-    let arrData = [];
+    let networthArrData = [];
+    let equityArrData = [];
+    let debtArrData = [];
 
     async function fetchData() {
       let response = await getNetworth(props.userTokenObj);
-      /* Set HC data format - arr([],[]..) */
+      /* Set HC data format - arr([x,y],[x,y]..) */
       for (const key in response) {
-        arrData.push([new Date(key).getTime(), response[key]]);
+        if (key === "networth") {
+          let networthMap = response[key];
+          for (const dateVal in networthMap) {
+            networthArrData.push([
+              new Date(dateVal).getTime(),
+              networthMap[dateVal],
+            ]);
+          }
+        } else if (key === "equity") {
+          let equityMap = response[key];
+          for (const dateVal in equityMap) {
+            equityArrData.push([
+              new Date(dateVal).getTime(),
+              equityMap[dateVal],
+            ]);
+          }
+        } else if (key === "debt") {
+          let debtMap = response[key];
+          for (const dateVal in debtMap) {
+            debtArrData.push([new Date(dateVal).getTime(), debtMap[dateVal]]);
+          }
+        }
       }
-      setChartSeriesData(arrData);
+      setNetworthSeriesData(networthArrData);
+      setEquitySeriesData(equityArrData);
+      setDebtSeriesData(debtArrData);
     }
     fetchData();
   }, [props]);
@@ -37,14 +64,23 @@ function Networth(props) {
     },
     series: [
       {
-        data: chartSeriesData,
+        name: "Networth",
+        data: networthSeriesData,
+      },
+      {
+        name: "Equity",
+        data: equitySeriesData,
+      },
+      {
+        name: "Debt",
+        data: debtSeriesData,
       },
     ],
   };
 
   return (
     <>
-      {chartSeriesData ? (
+      {networthSeriesData ? (
         <HighchartsReact
           highcharts={Highcharts}
           options={highChartOptions}
