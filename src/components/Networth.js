@@ -50,6 +50,9 @@ function Networth(props) {
 
   /* Highcharts Config */
   const highChartOptions = {
+    credits: {
+      enabled: false,
+    },
     chart: {
       zoomType: "x",
     },
@@ -59,7 +62,15 @@ function Networth(props) {
     xAxis: {
       type: "datetime",
       labels: {
-        format: "{value:%b %Y}", // Jan 2021
+        formatter: function () {
+          let selectedPointsLength =
+            this.chart.series[0].xData.length - this.chart.series[0].cropStart;
+          if (selectedPointsLength < 32) {
+            return Highcharts.dateFormat("%d/%m/%y", this.value);
+          } else {
+            return Highcharts.dateFormat("%b %Y", this.value);
+          }
+        },
       },
     },
     series: [
@@ -76,6 +87,13 @@ function Networth(props) {
         data: debtSeriesData,
       },
     ],
+    plotOptions: {
+      series: {
+        marker: {
+          enabled: false,
+        },
+      },
+    },
   };
 
   return (
