@@ -1,6 +1,6 @@
 export function getHoldings(userInput) {
   //await sleep(2000);
-  return fetch("http://localhost:3005/PortfolioApis/getuserholdings", {
+  return fetch(process.env.REACT_APP_API_URL + "/getuserholdings", {
     method: "POST",
     headers: {
       token: userInput.Token,
@@ -18,7 +18,7 @@ export function getHoldings(userInput) {
 }
 
 export async function getToken(userInput) {
-  return fetch("http://localhost:3005/PortfolioApis/login", {
+  return fetch(process.env.REACT_APP_API_URL + "/login", {
     method: "POST",
     body: JSON.stringify({
       UserId: userInput.UserId,
@@ -34,7 +34,7 @@ export async function getToken(userInput) {
 }
 
 export function fetchAllCompanies(userInput) {
-  return fetch("http://localhost:3005/PortfolioApis/fetchallcompanies", {
+  return fetch(process.env.REACT_APP_API_URL + "/fetchallcompanies", {
     method: "POST",
     headers: {
       token: userInput.Token,
@@ -52,7 +52,7 @@ export function fetchAllCompanies(userInput) {
 }
 
 export function addHoldings(userInput, holdings) {
-  return fetch("http://localhost:3005/PortfolioApis/adduserholdings", {
+  return fetch(process.env.REACT_APP_API_URL + "/adduserholdings", {
     method: "POST",
     headers: {
       token: userInput.Token,
@@ -71,7 +71,7 @@ export function addHoldings(userInput, holdings) {
 }
 
 export function getNetworth(userInput, holdings) {
-  return fetch("http://localhost:3005/PortfolioApis/fetchnetworthoverperiod", {
+  return fetch(process.env.REACT_APP_API_URL + "/fetchnetworthoverperiod", {
     method: "POST",
     headers: {
       token: userInput.Token,
