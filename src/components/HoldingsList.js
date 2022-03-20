@@ -2,6 +2,8 @@ import { React, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react/cjs/react.development";
 import "./HoldingsList.css";
+import { IconButton } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const columns = [
   { field: "companyName", headerName: "Company", minWidth: 250, flex: 1 },
@@ -11,6 +13,19 @@ const columns = [
   { field: "currentValue", headerName: "Current Val", minWidth: 75, flex: 1 },
   { field: "pl", headerName: "PL", minWidth: 75, flex: 1 },
   { field: "netPct", headerName: "Net %", minWidth: 75, flex: 1 },
+  {
+    field: "actions",
+    headerName: "Actions",
+    minWidth: 75,
+    flex: 1,
+    renderCell: () => (
+      <>
+        <IconButton>
+          <RemoveIcon style={{ color: "gray" }}></RemoveIcon>
+        </IconButton>
+      </>
+    ),
+  },
 ];
 
 let rows = [];
