@@ -12,6 +12,9 @@ function HoldingsList(props) {
   const [rowsUpdated, setRowsUpdated] = useState(false);
   const [rowSelected, setSelectedRow] = useState();
 
+  /* This state is used for state refresh (to refresh table contents on Sell)  */
+  const [holdingRows, setHoldingRows] = useState([]);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,6 +57,8 @@ function HoldingsList(props) {
     for (let holding of props.holdings.Holdings) {
       rows.push(holding);
     }
+    /* Datagrid rows updated to state variable holdingRows to refresh instantly */
+    setHoldingRows(rows);
     setRowsUpdated(true);
   }, [props]);
 
@@ -62,7 +67,7 @@ function HoldingsList(props) {
       {rowsUpdated ? (
         <>
           <DataGrid
-            rows={rows}
+            rows={holdingRows}
             columns={columns}
             getRowId={(row) => row.companyid}
           />
@@ -72,6 +77,7 @@ function HoldingsList(props) {
               row={rowSelected}
               onClose={handleClose}
               userTokenObj={props.userTokenObj}
+              reloadData={props.reloadData}
             ></SellHoldingForm>
           ) : (
             <></>

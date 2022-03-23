@@ -41,8 +41,10 @@ function SellHoldingForm(props) {
     /* Negate the quantity as it is a sell transaction */
     holding.quantity = (-holding.quantity).toString();
     holdingArr[0] = holding;
-    addHoldings(props.userTokenObj, holdingArr);
+    await addHoldings(props.userTokenObj, holdingArr);
     props.onClose();
+    /* Reload fetchData() in HoldingsPage.js to refresh data */
+    props.reloadData();
   }
 
   return (

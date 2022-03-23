@@ -22,7 +22,11 @@ function HoldingsPage(props) {
     <>
       {isDataLoaded ? (
         <>
-          <HoldingsList holdings={holdings} userTokenObj={props.userTokenObj} />
+          <HoldingsList
+            holdings={holdings}
+            userTokenObj={props.userTokenObj}
+            reloadData={fetchData}
+          />
           <p>
             <Link to="/holding">
               <Button variant="contained">Add Holding</Button>
