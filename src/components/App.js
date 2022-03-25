@@ -185,6 +185,25 @@ function App() {
               </ListItemButton>
             </ListItem>
             <Divider />
+
+            <ListItem
+              sx={{ padding: "0" }}
+              component={Link}
+              to="/holdings"
+              selected={selectedItem === 3}
+              onClick={(event) => handleClickForListItem(event, 3)}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Model Portfolio"
+                  sx={{ color: "#000000" }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
           </List>
         </Drawer>
 
