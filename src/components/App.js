@@ -24,6 +24,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 import WorkIcon from "@mui/icons-material/Work";
+import ModelPortfolioPage from "./ModelPortfolioPage";
 
 const listItems = [
   {
@@ -189,7 +190,7 @@ function App() {
             <ListItem
               sx={{ padding: "0" }}
               component={Link}
-              to="/holdings"
+              to="/modelportfolio"
               selected={selectedItem === 3}
               onClick={(event) => handleClickForListItem(event, 3)}
             >
@@ -281,6 +282,30 @@ function App() {
                           }}
                         >
                           <Networth userTokenObj={userTokenObj} />
+                        </Paper>
+                      </Grid>
+                    </Container>
+                  </>
+                );
+              }}
+            />
+            <Route
+              path="/modelportfolio"
+              render={() => {
+                return (
+                  <>
+                    <Toolbar />
+                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                      <Grid item xs={12}>
+                        <Paper
+                          sx={{
+                            p: 2,
+                            display: "flex",
+                            flexDirection: "column",
+                            height: 600,
+                          }}
+                        >
+                          <ModelPortfolioPage userTokenObj={userTokenObj} />
                         </Paper>
                       </Grid>
                     </Container>
