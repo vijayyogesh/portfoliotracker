@@ -88,4 +88,23 @@ export function getNetworth(userInput, holdings) {
     });
 }
 
+/* Fetch Model Portfolio */
+export function getModelPortfolio(userInput) {
+  return fetch(process.env.REACT_APP_API_URL + "/getmodelportfolio", {
+    method: "POST",
+    headers: {
+      token: userInput.Token,
+    },
+    body: JSON.stringify({
+      UserId: userInput.UserId,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
