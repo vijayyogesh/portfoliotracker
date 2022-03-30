@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { getModelPortfolio } from "../api/portfolioApi";
+import { getModelPortfolio, getSyncModelPortfolio } from "../api/portfolioApi";
 import { DataGrid } from "@mui/x-data-grid";
 
 let rows = [];
@@ -7,12 +7,21 @@ let rows = [];
 function ModelPortfolioPage(props) {
   const [rowsUpdated, setRowsUpdated] = useState(false);
 
-  /* Fetch Model POrtfolio data from api */
+  /* Fetch Model Portfolio/Sync data from api and merge */
   async function fetchModelPortfolio() {
-    let response = await getModelPortfolio(props.userTokenObj);
+    let modelPfResponse = await getModelPortfolio(props.userTokenObj);
+    let syncModelResponse = await getSyncModelPortfolio(props.userTokenObj);
+
+    let syncModelMap = new Map();
+    for (let adjustedHolding of syncModelResponse.AdjustedHoldings) {
+      syncModelMap.set(adjustedHolding.securityid, adjustedHolding);
+    }
+
     rows = [];
-    for (let security of response.Securities) {
-      rows.push(security);
+    for (let security of modelPfResponse.Securities) {
+      let adjustedHolding = syncModelMap.get(security.securityid);
+      let row = { ...security, ...adjustedHolding };
+      rows.push(row);
     }
     setRowsUpdated(true);
   }
@@ -33,6 +42,24 @@ function ModelPortfolioPage(props) {
       field: "expectedAllocation",
       headerName: "Allocation",
       minWidth: 75,
+      flex: 1,
+    },
+    {
+      field: "adjustedAmount",
+      headerName: "Adjusted Amt",
+      minWidth: 75,
+      flex: 1,
+    },
+    {
+      field: "belowReasonablePrice",
+      headerName: "BRP",
+      minWidth: 50,
+      flex: 1,
+    },
+    {
+      field: "percentBelowReasonablePrice",
+      headerName: "% BRP",
+      minWidth: 50,
       flex: 1,
     },
   ];

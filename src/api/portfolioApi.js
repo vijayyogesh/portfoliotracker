@@ -107,4 +107,23 @@ export function getModelPortfolio(userInput) {
     });
 }
 
+/* Sync Model Portfolio */
+export function getSyncModelPortfolio(userInput) {
+  return fetch(process.env.REACT_APP_API_URL + "/syncportfolio", {
+    method: "POST",
+    headers: {
+      token: userInput.Token,
+    },
+    body: JSON.stringify({
+      UserId: userInput.UserId,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
