@@ -31,11 +31,11 @@ function ModelPortfolioPage(props) {
   }, []);
 
   const columns = [
-    { field: "securityid", headerName: "Company", minWidth: 200, flex: 1 },
+    { field: "securityid", headerName: "Company", minWidth: 150, flex: 1 },
     {
       field: "reasonablePrice",
       headerName: "Reasonable Price",
-      minWidth: 75,
+      minWidth: 100,
       flex: 1,
     },
     {
