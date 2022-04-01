@@ -18,7 +18,7 @@ function ManageHoldings(props) {
     companyid: "",
     quantity: "",
     buyPrice: "",
-    buyDate: "2021-01-01",
+    buyDate: "",
   });
   const [userAdded, setUserAdded] = useState(Boolean);
 
