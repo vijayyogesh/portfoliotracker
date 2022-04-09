@@ -23,7 +23,10 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "run-p start:jsonapi startApp",
+    "startApp": "react-scripts start",
+    "prestart:jsonapi": "node src/tools/createMockDb.js",
+    "start:jsonapi": "node src/tools/apiServer.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

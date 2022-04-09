@@ -43,3 +43,16 @@ server.use((req, res, next) => {
   // Continue to JSON Server router
   next();
 });
+
+server.post("/holdings/", function (req, res, next) {
+  next();
+});
+
+// Use default router
+server.use(router);
+
+// Start server
+const port = 3002;
+server.listen(port, () => {
+  console.log(`JSON Server is running on port ${port}`);
+});
