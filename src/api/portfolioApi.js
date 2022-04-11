@@ -1,20 +1,27 @@
 export function getHoldings(userInput) {
-  //await sleep(2000);
-  return fetch(process.env.REACT_APP_API_URL + "/getuserholdings", {
-    method: "POST",
-    headers: {
-      token: userInput.Token,
-    },
-    body: JSON.stringify({
-      UserId: userInput.UserId,
-    }),
-  })
-    .then((response) => {
-      return response.json();
+  if (process.env.REACT_APP_DEMO === "Y") {
+    return fetch(process.env.REACT_APP_DEMO_URL + "/holdings").then(
+      (response) => {
+        return response.json();
+      }
+    );
+  } else {
+    return fetch(process.env.REACT_APP_API_URL + "/getuserholdings", {
+      method: "POST",
+      headers: {
+        token: userInput.Token,
+      },
+      body: JSON.stringify({
+        UserId: userInput.UserId,
+      }),
     })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
 export async function getToken(userInput) {

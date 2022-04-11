@@ -33,21 +33,6 @@ server.use(function (req, res, next) {
   setTimeout(next, 0);
 });
 
-// Declaring custom routes below. Add custom routes before JSON Server router
-
-// Add createdAt to all POSTS
-server.use((req, res, next) => {
-  if (req.method === "POST") {
-    req.body.createdAt = Date.now();
-  }
-  // Continue to JSON Server router
-  next();
-});
-
-server.post("/holdings/", function (req, res, next) {
-  next();
-});
-
 // Use default router
 server.use(router);
 
