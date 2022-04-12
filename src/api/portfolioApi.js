@@ -78,21 +78,29 @@ export function addHoldings(userInput, holdings) {
 }
 
 export function getNetworth(userInput, holdings) {
-  return fetch(process.env.REACT_APP_API_URL + "/fetchnetworthoverperiod", {
-    method: "POST",
-    headers: {
-      token: userInput.Token,
-    },
-    body: JSON.stringify({
-      userId: userInput.UserId,
-    }),
-  })
-    .then((response) => {
-      return response.json();
+  if (process.env.REACT_APP_DEMO === "Y") {
+    return fetch(process.env.REACT_APP_DEMO_URL + "/netWorth").then(
+      (response) => {
+        return response.json();
+      }
+    );
+  } else {
+    return fetch(process.env.REACT_APP_API_URL + "/fetchnetworthoverperiod", {
+      method: "POST",
+      headers: {
+        token: userInput.Token,
+      },
+      body: JSON.stringify({
+        userId: userInput.UserId,
+      }),
     })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
 /* Fetch Model Portfolio */
