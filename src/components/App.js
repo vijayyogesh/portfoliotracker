@@ -45,7 +45,7 @@ function App() {
   };
 
   /* State to Highlight selected ListItem */
-  const [selectedItem, setSelectedItem] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(2);
   const handleClickForListItem = (event, index) => {
     setSelectedItem(index);
   };

@@ -55,6 +55,12 @@ function Networth(props) {
     },
     chart: {
       zoomType: "x",
+      /* Added to fit container, HC fits oly on window resize and not parent container size changes */
+      events: {
+        render: function () {
+          this.reflow();
+        },
+      },
     },
     title: {
       text: "My Networth",
