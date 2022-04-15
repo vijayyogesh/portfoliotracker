@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { getNetworth } from "../api/portfolioApi";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";

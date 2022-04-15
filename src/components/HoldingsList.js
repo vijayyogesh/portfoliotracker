@@ -1,6 +1,6 @@
 import { React, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import "./HoldingsList.css";
 import { IconButton } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -54,12 +54,14 @@ function HoldingsList(props) {
 
   useEffect(() => {
     rows = [];
-    for (let holding of props.holdings.Holdings) {
-      rows.push(holding);
+    if (props.holdings.Holdings) {
+      for (let holding of props.holdings.Holdings) {
+        rows.push(holding);
+      }
+      /* Datagrid rows updated to state variable holdingRows to refresh instantly */
+      setHoldingRows(rows);
+      setRowsUpdated(true);
     }
-    /* Datagrid rows updated to state variable holdingRows to refresh instantly */
-    setHoldingRows(rows);
-    setRowsUpdated(true);
   }, [props]);
 
   return (

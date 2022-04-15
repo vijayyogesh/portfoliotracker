@@ -56,7 +56,7 @@ function App() {
     Token: "",
     IsAuthenticated: false,
   });
-  if (!userTokenObj.IsAuthenticated) {
+  if (!userTokenObj.IsAuthenticated && process.env.REACT_APP_DEMO !== "Y") {
     return <Login setUserTokenObj={setUserTokenObj}></Login>;
   }
 
