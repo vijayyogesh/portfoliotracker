@@ -3469,8 +3469,87 @@ const allCompanies = [
   },
 ];
 
+const modelPf = {
+  userId: "demouser",
+  Securities: [
+    {
+      securityid: "RELIANCE",
+      reasonablePrice: "2000.00",
+      expectedAllocation: "10.00",
+    },
+    {
+      securityid: "TCS",
+      reasonablePrice: "3500.00",
+      expectedAllocation: "10.00",
+    },
+    {
+      securityid: "HDFCBANK",
+      reasonablePrice: "1600.00",
+      expectedAllocation: "10.00",
+    },
+    {
+      securityid: "INFY",
+      reasonablePrice: "1700.00",
+      expectedAllocation: "10.00",
+    },
+    {
+      securityid: "ICICIBANK",
+      reasonablePrice: "750.00",
+      expectedAllocation: "10.00",
+    },
+    {
+      securityid: "HDFC NIFTY 50 DIRECT",
+      reasonablePrice: "160.00",
+      expectedAllocation: "50.00",
+    },
+  ],
+};
+
+const syncModelPf = {
+  AdjustedHoldings: [
+    {
+      securityid: "RELIANCE",
+      adjustedAmount: "133980.00",
+      belowReasonablePrice: "N",
+      percentBelowReasonablePrice: "-27.59",
+    },
+    {
+      securityid: "TCS",
+      adjustedAmount: "127700.00",
+      belowReasonablePrice: "N",
+      percentBelowReasonablePrice: "-4.71",
+    },
+    {
+      securityid: "HDFCBANK",
+      adjustedAmount: "138029.00",
+      belowReasonablePrice: "Y",
+      percentBelowReasonablePrice: "8.50",
+    },
+    {
+      securityid: "INFY",
+      adjustedAmount: "133880.00",
+      belowReasonablePrice: "N",
+      percentBelowReasonablePrice: "-3.00",
+    },
+    {
+      securityid: "ICICIBANK",
+      adjustedAmount: "134241.00",
+      belowReasonablePrice: "N",
+      percentBelowReasonablePrice: "-1.54",
+    },
+    {
+      securityid: "HDFC NIFTY 50 DIRECT",
+      adjustedAmount: "750000.00",
+      belowReasonablePrice: "N",
+      percentBelowReasonablePrice: "-2.39",
+    },
+  ],
+};
+
 module.exports = {
   holdings,
   netWorth,
   allCompanies,
+  modelPf,
+  syncModelPf,
 };

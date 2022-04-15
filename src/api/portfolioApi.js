@@ -1,4 +1,10 @@
-import { allCompanies, holdings, netWorth } from "../tools/mockData";
+import {
+  allCompanies,
+  holdings,
+  modelPf,
+  netWorth,
+  syncModelPf,
+} from "../tools/mockData";
 
 export function getHoldings(userInput) {
   if (process.env.REACT_APP_DEMO === "Y") {
@@ -66,22 +72,26 @@ export function fetchAllCompanies(userInput) {
 }
 
 export function addHoldings(userInput, holdings) {
-  return fetch(process.env.REACT_APP_API_URL + "/adduserholdings", {
-    method: "POST",
-    headers: {
-      token: userInput.Token,
-    },
-    body: JSON.stringify({
-      userId: userInput.UserId,
-      Holdings: holdings,
-    }),
-  })
-    .then((response) => {
-      return response.json();
+  if (process.env.REACT_APP_DEMO === "Y") {
+    return "No changes for dummy data";
+  } else {
+    return fetch(process.env.REACT_APP_API_URL + "/adduserholdings", {
+      method: "POST",
+      headers: {
+        token: userInput.Token,
+      },
+      body: JSON.stringify({
+        userId: userInput.UserId,
+        Holdings: holdings,
+      }),
     })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
 export function getNetworth(userInput, holdings) {
@@ -113,40 +123,48 @@ export function getNetworth(userInput, holdings) {
 
 /* Fetch Model Portfolio */
 export function getModelPortfolio(userInput) {
-  return fetch(process.env.REACT_APP_API_URL + "/getmodelportfolio", {
-    method: "POST",
-    headers: {
-      token: userInput.Token,
-    },
-    body: JSON.stringify({
-      UserId: userInput.UserId,
-    }),
-  })
-    .then((response) => {
-      return response.json();
+  if (process.env.REACT_APP_DEMO === "Y") {
+    return modelPf;
+  } else {
+    return fetch(process.env.REACT_APP_API_URL + "/getmodelportfolio", {
+      method: "POST",
+      headers: {
+        token: userInput.Token,
+      },
+      body: JSON.stringify({
+        UserId: userInput.UserId,
+      }),
     })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
 /* Sync Model Portfolio */
 export function getSyncModelPortfolio(userInput) {
-  return fetch(process.env.REACT_APP_API_URL + "/syncportfolio", {
-    method: "POST",
-    headers: {
-      token: userInput.Token,
-    },
-    body: JSON.stringify({
-      UserId: userInput.UserId,
-    }),
-  })
-    .then((response) => {
-      return response.json();
+  if (process.env.REACT_APP_DEMO === "Y") {
+    return syncModelPf;
+  } else {
+    return fetch(process.env.REACT_APP_API_URL + "/syncportfolio", {
+      method: "POST",
+      headers: {
+        token: userInput.Token,
+      },
+      body: JSON.stringify({
+        UserId: userInput.UserId,
+      }),
     })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

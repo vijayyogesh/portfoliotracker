@@ -226,32 +226,14 @@ function App() {
               path="/"
               exact
               render={() => {
-                return <HomePage />;
+                return formHoldingsPage(userTokenObj);
               }}
             />
             <Route path="/homepage" component={HomePage} />
             <Route
               path="/holdings"
               render={() => {
-                return (
-                  <>
-                    <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                      <Grid item xs={12}>
-                        <Paper
-                          sx={{
-                            p: 2,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: 600,
-                          }}
-                        >
-                          <HoldingsPage userTokenObj={userTokenObj} />
-                        </Paper>
-                      </Grid>
-                    </Container>
-                  </>
-                );
+                return formHoldingsPage(userTokenObj);
               }}
             />
             <Route path="/login" component={Login} />
@@ -268,49 +250,13 @@ function App() {
             <Route
               path="/networth"
               render={() => {
-                return (
-                  <>
-                    <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                      <Grid item xs={12}>
-                        <Paper
-                          sx={{
-                            p: 2,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: 400,
-                          }}
-                        >
-                          <Networth userTokenObj={userTokenObj} />
-                        </Paper>
-                      </Grid>
-                    </Container>
-                  </>
-                );
+                return formNetworthPage(userTokenObj);
               }}
             />
             <Route
               path="/modelportfolio"
               render={() => {
-                return (
-                  <>
-                    <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                      <Grid item xs={12}>
-                        <Paper
-                          sx={{
-                            p: 2,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: 600,
-                          }}
-                        >
-                          <ModelPortfolioPage userTokenObj={userTokenObj} />
-                        </Paper>
-                      </Grid>
-                    </Container>
-                  </>
-                );
+                return formModelPfPage(userTokenObj);
               }}
             />
           </Switch>
@@ -318,6 +264,73 @@ function App() {
       </Box>
 
       <Header />
+    </>
+  );
+}
+
+/* Wrappers for right pane */
+function formHoldingsPage(userTokenObj) {
+  return (
+    <>
+      <Toolbar />
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid item xs={12}>
+          <Paper
+            sx={{
+              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              height: 600,
+            }}
+          >
+            <HoldingsPage userTokenObj={userTokenObj} />
+          </Paper>
+        </Grid>
+      </Container>
+    </>
+  );
+}
+
+function formNetworthPage(userTokenObj) {
+  return (
+    <>
+      <Toolbar />
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid item xs={12}>
+          <Paper
+            sx={{
+              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              height: 400,
+            }}
+          >
+            <Networth userTokenObj={userTokenObj} />
+          </Paper>
+        </Grid>
+      </Container>
+    </>
+  );
+}
+
+function formModelPfPage(userTokenObj) {
+  return (
+    <>
+      <Toolbar />
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid item xs={12}>
+          <Paper
+            sx={{
+              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              height: 600,
+            }}
+          >
+            <ModelPortfolioPage userTokenObj={userTokenObj} />
+          </Paper>
+        </Grid>
+      </Container>
     </>
   );
 }
