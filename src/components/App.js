@@ -47,6 +47,10 @@ function App() {
   /* State to Highlight selected ListItem */
   const [selectedItem, setSelectedItem] = useState(2);
   const handleClickForListItem = (event, index) => {
+    /* Below check added for mobile to close Drawer on menu click */
+    if (window.innerWidth < 450) {
+      setOpen(!open);
+    }
     setSelectedItem(index);
   };
 
