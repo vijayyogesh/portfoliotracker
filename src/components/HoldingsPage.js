@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getHoldings } from "../api/portfolioApi";
 import HoldingsList from "./HoldingsList";
 import Button from "@mui/material/Button";
+import { Divider } from "@mui/material";
 
 function HoldingsPage(props) {
   const [holdings, setHoldings] = useState([]);

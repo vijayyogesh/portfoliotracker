@@ -8,11 +8,6 @@ import {
 
 export function getHoldings(userInput) {
   if (process.env.REACT_APP_DEMO === "Y") {
-    /*return fetch(process.env.REACT_APP_DEMO_URL + "/holdings").then(
-      (response) => {
-        return response.json();
-      }
-    );*/
     return holdings;
   } else {
     return fetch(process.env.REACT_APP_API_URL + "/getuserholdings", {
@@ -96,11 +91,6 @@ export function addHoldings(userInput, holdings) {
 
 export function getNetworth(userInput, holdings) {
   if (process.env.REACT_APP_DEMO === "Y") {
-    /*return fetch(process.env.REACT_APP_DEMO_URL + "/netWorth").then(
-      (response) => {
-        return response.json();
-      }
-    );*/
     return netWorth;
   } else {
     return fetch(process.env.REACT_APP_API_URL + "/fetchnetworthoverperiod", {

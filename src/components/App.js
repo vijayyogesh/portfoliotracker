@@ -287,6 +287,17 @@ function formHoldingsPage(userTokenObj) {
               height: 600,
             }}
           >
+            <Typography
+              sx={{
+                fontFamily: "sans-serif",
+                fontWeight: "normal",
+                fontSize: "20px",
+                marginBottom: "15px",
+              }}
+            >
+              Holdings
+            </Typography>
+
             <HoldingsPage userTokenObj={userTokenObj} />
           </Paper>
         </Grid>
