@@ -6,6 +6,7 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import ManageHoldings from "./ManageHoldings";
 import Networth from "./Networth";
+import Return from "./Return";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
@@ -209,6 +210,23 @@ function App() {
               </ListItemButton>
             </ListItem>
             <Divider />
+
+            <ListItem
+              sx={{ padding: "0" }}
+              component={Link}
+              to="/return"
+              selected={selectedItem === 4}
+              onClick={(event) => handleClickForListItem(event, 4)}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <ShowChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Return" sx={{ color: "#000000" }} />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+
           </List>
         </Drawer>
 
@@ -261,6 +279,12 @@ function App() {
               path="/modelportfolio"
               render={() => {
                 return formModelPfPage(userTokenObj);
+              }}
+            />
+            <Route
+              path="/return"
+              render={() => {
+                return formReturnPage(userTokenObj);
               }}
             />
           </Switch>
@@ -343,6 +367,28 @@ function formModelPfPage(userTokenObj) {
             }}
           >
             <ModelPortfolioPage userTokenObj={userTokenObj} />
+          </Paper>
+        </Grid>
+      </Container>
+    </>
+  );
+}
+
+function formReturnPage(userTokenObj) {
+  return (
+    <>
+      <Toolbar />
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid item xs={12}>
+          <Paper
+            sx={{
+              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              height: 400,
+            }}
+          >
+            <Return userTokenObj={userTokenObj} />
           </Paper>
         </Grid>
       </Container>

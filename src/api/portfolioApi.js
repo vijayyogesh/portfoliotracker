@@ -4,6 +4,7 @@ import {
   modelPf,
   netWorth,
   syncModelPf,
+  xirrReturn,
 } from "../tools/mockData";
 
 export function getHoldings(userInput) {
@@ -146,6 +147,29 @@ export function getSyncModelPortfolio(userInput) {
       },
       body: JSON.stringify({
         UserId: userInput.UserId,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+/* Fetch Return Data for Portfolio */
+export function getReturn(userInput, holdings) {
+  if (process.env.REACT_APP_DEMO === "Y") {
+    return xirrReturn;
+  } else {
+    return fetch(process.env.REACT_APP_API_URL + "/calculatexirrreturn", {
+      method: "POST",
+      headers: {
+        token: userInput.Token,
+      },
+      body: JSON.stringify({
+        userId: userInput.UserId,
       }),
     })
       .then((response) => {
