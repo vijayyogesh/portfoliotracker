@@ -9,12 +9,14 @@ function Networth(props) {
   const [equitySeriesData, setEquitySeriesData] = useState([]);
   const [debtSeriesData, setDebtSeriesData] = useState([]);
   const [bmSeriesData, setBMSeriesData] = useState([]);
+  const [investedSeriesData, setInvestedSeriesData] = useState([]);
 
   useEffect(() => {
     let networthArrData = [];
     let equityArrData = [];
     let debtArrData = [];
     let bmArrData = [];
+    let investedArrData = [];
 
     async function fetchData() {
       let response = await getNetworth(props.userTokenObj);
@@ -46,12 +48,18 @@ function Networth(props) {
           for (const dateVal in bmMap) {
             bmArrData.push([new Date(dateVal).getTime(), bmMap[dateVal]]);
           }
+        } else if (key === "invested") {
+          let invMap = response[key];
+          for (const dateVal in invMap) {
+            investedArrData.push([new Date(dateVal).getTime(), invMap[dateVal]]);
+          }
         }
       }
       setNetworthSeriesData(networthArrData);
       setEquitySeriesData(equityArrData);
       setDebtSeriesData(debtArrData);
       setBMSeriesData(bmArrData);
+      setInvestedSeriesData(investedArrData);
     }
     fetchData();
   }, [props]);
@@ -103,6 +111,10 @@ function Networth(props) {
       {
         name: "Benchmark",
         data: bmSeriesData,
+      },
+      {
+        name: "Invested",
+        data: investedSeriesData,
       },
     ],
     plotOptions: {
